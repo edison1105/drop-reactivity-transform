@@ -1,0 +1,78 @@
+{
+  "name": "drop-reactivity-transform",
+  "version": "0.0.7",
+  "packageManager": "pnpm@7.4.0",
+  "description": "a tool that helps you drop reactivity transform in seconds.",
+  "author": "Edison1105 <daiwei521@126.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/edison1105/drop-reactivity-transform#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edison1105/drop-reactivity-transform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/edison1105/drop-reactivity-transform/issues"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "dropReactivityTransform": "bin/dropReactivityTransform.mjs"
+  },
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "dev": "esno src/commands/dropReactivityTransform.ts",
+    "build": "unbuild",
+    "stub": "unbuild --stub",
+    "release": "bumpp && npm publish --access=public",
+    "format": "prettier --write --cache --parser typescript \"**/*.[tj]s?(x)\"",
+    "test": "vitest"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.22.5",
+    "@babel/types": "^7.22.5",
+    "@types/node": "^20.3.1",
+    "bumpp": "^9.1.1",
+    "eslint": "^8.43.0",
+    "esno": "^0.16.3",
+    "estree-walker": "^2.0.2",
+    "fast-glob": "^3.2.12",
+    "kleur": "^4.1.5",
+    "lint-staged": "^13.1.1",
+    "magic-string": "^0.30.0",
+    "prettier": "^2.8.8",
+    "simple-git-hooks": "^2.8.1",
+    "typescript": "^5.1.3",
+    "unbuild": "^1.2.1",
+    "vitest": "^0.30.1"
+  },
+  "keywords": [
+    "drop-reactivity-transform",
+    "reactivity-transform"
+  ],
+  "dependencies": {
+    "vue": "^3.3.4"
+  }
+}
