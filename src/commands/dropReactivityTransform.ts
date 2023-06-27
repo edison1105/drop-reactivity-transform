@@ -6,7 +6,8 @@ import c from 'kleur'
 
 runCli(async args => {
   const folder = args[0]
-  const nonInjectImport = args[1] === 'nonInjectImport'
+  const nonInjectImport = !args.includes('--nonInjectImport')
+
   const source = folder ? path.resolve(process.cwd(), folder) : process.cwd()
   const files = fg.sync(`${source}/**/*.vue`)
 
@@ -22,7 +23,7 @@ runCli(async args => {
       )
     )
     
-    drop(path.resolve(process.cwd(), file), !nonInjectImport)
+    drop(path.resolve(process.cwd(), file), nonInjectImport)
 
     console.log(
       c.green(
