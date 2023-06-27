@@ -12,8 +12,12 @@ To use drop-reactivity-transform, provide the target directory name as the first
 ```bash
 dropReactivityTransform [target directory name]
 
-// transform files in the src directory
-dropReactivityTransform src 
+# transform files in the src directory
+dropReactivityTransform src
+
+# transform files in the working directory
+dropReactivityTransform . 
+
 ```
 If you use [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import) and don't want to import these APIs from Vue, you can use the `--nonInjectImport` flag as a second parameter. Here's an example:
 ```bash
@@ -26,11 +30,11 @@ Reactivity Transform was an experimental feature and has now been deprecated. It
 
 # How it works?
 The `drop-reactivity-transform` tool converts the following ReactivityTransform APIs to reactivity APIs:
-- $ref -> ref
-- $computed -> computed
-- $shallowRef -> shallowRef
-- $customRef -> customRef
-- $toRef -> toRef
+- `$ref` -> `ref`
+- `$computed` -> `computed`
+- `$shallowRef` -> `shallowRef`
+- `$customRef` -> `customRef`
+- `$toRef` -> `toRef`
 
 The [reactivity-transform](https://github.com/vuejs/core/tree/main/packages/reactivity-transform ) module has actually done the code to convert the above apis to the reactivity API internally. This tool takes that code and modifies it. 
 
@@ -39,14 +43,14 @@ The [reactivity-transform](https://github.com/vuejs/core/tree/main/packages/reac
 Here's some examples of the transformation:
 
 ### Before
-```ts
+```vue
 <script setup lang="ts">
   let count = $ref<number>(0)
   console.log(count)
 </script>
 ```
 ### After
-```ts
+```vue
 <script setup lang="ts">
   import { ref } from 'vue'
 
@@ -55,16 +59,16 @@ Here's some examples of the transformation:
 </script>
 ```
 
-### Here's an example of using the `--nonInjectImport` flag:
+Here's an example of using the `--nonInjectImport` flag:
 ### Before
-```ts
+```vue
 <script setup lang="ts">
   let count = $ref<number>(0)
   console.log(count)
 </script>
 ```
 ### After
-```ts
+```vue
 <script setup lang="ts">
   let count = ref<number>(0)
   console.log(count.value)
