@@ -11,13 +11,13 @@ npm i -g drop-reactivity-transform
 ```
 ## Usages
 ```bash
-drop-reactivity-transform src
+dropReactivityTransform src
 ```
 **The second parameter is the folder name**
 
 If you use https://github.com/antfu/unplugin-auto-import, and don't want to import these api's from vue, you can use the second parameter `nonInjectImport` 
 ```bash
-drop-reactivity-transform src nonInjectImport
+dropReactivityTransform src nonInjectImport
 ```
 
 ## How
