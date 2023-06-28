@@ -19,7 +19,9 @@ export function drop(filename: string, injectImport = true) {
 export function transformScript(filename: string, code: string, injectImport = true) {
   // for .ts and .js file should always inject import
   // .ts
-  if (filename.endsWith('.ts') && shouldTransform(code)) {
+  if (filename.endsWith('.ts')) {
+    if (!shouldTransform(code)) return { shouldRewrite: false, code }
+
     const { code: script } = doTransform(code, {
       filename,
       parserPlugins: ['typescript']
@@ -31,7 +33,9 @@ export function transformScript(filename: string, code: string, injectImport = t
   }
 
   // .js
-  if (filename.endsWith('.js') && shouldTransform(code)) {
+  if (filename.endsWith('.js')) {
+    if (!shouldTransform(code)) return { shouldRewrite: false, code }
+    
     const { code: script } = doTransform(code, { filename })
     return {
       shouldRewrite: true,
