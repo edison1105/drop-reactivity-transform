@@ -6,10 +6,10 @@ import fs from 'fs'
 
 export function drop(filename: string, injectImport = true) {
   try {
-    const code = fs.readFileSync(filename, 'utf-8')
-    const { shouldRewrite, script } = transformScript(filename, code, injectImport)
+    const content = fs.readFileSync(filename, 'utf-8')
+    const { shouldRewrite, code } = transformScript(filename, content, injectImport)
     if (shouldRewrite) {
-      fs.writeFileSync(filename, script, 'utf-8')
+      fs.writeFileSync(filename, code, 'utf-8')
     }
   } catch (error) {
     console.log(error)
@@ -27,20 +27,16 @@ export function transformScript(filename: string, code: string, injectImport = t
   }
 
   let shouldRewrite = false
-  const refs: string[] = []
-  const helpers: string[] = []
 
   // normalScript
   if (script && shouldTransform(script.content)) {
     const start = script.loc.start.offset
     const end = script.loc.end.offset
-    const { code: normalScriptCode, importedHelpers, rootRefs } = doTransform(
+    const { code: normalScriptCode } = doTransform(
       script.content!,
       { filename, parserPlugins },
       injectImport
     )
-    helpers.push(...importedHelpers)
-    refs.push(...rootRefs)
     s.overwrite(start!, end!, normalScriptCode)
     shouldRewrite = true
   }
@@ -48,22 +44,18 @@ export function transformScript(filename: string, code: string, injectImport = t
   if (scriptSetup && shouldTransform(scriptSetup.content)) {
     const start = scriptSetup.loc.start.offset
     const end = scriptSetup.loc.end.offset
-    const { code: scriptSetupCode, importedHelpers, rootRefs } = doTransform(
+    const { code: scriptSetupCode } = doTransform(
       scriptSetup.content!,
       { filename, parserPlugins },
       injectImport
     )
-    helpers.push(...importedHelpers)
-    refs.push(...rootRefs)
     s.overwrite(start!, end!, scriptSetupCode)
     shouldRewrite = true
   }
 
   return {
     shouldRewrite,
-    rootRefs: refs,
-    importedHelpers: helpers,
-    script: s.toString()
+    code: s.toString()
   }
 }
 
