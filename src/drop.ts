@@ -17,6 +17,33 @@ export function drop(filename: string, injectImport = true) {
 }
 
 export function transformScript(filename: string, code: string, injectImport = true) {
+  // for .ts and .js file should always inject import
+  // .ts
+  if (filename.endsWith('.ts') && shouldTransform(code)) {
+    const { code: script } = doTransform(code, {
+      filename,
+      parserPlugins: ['typescript']
+    })
+    return {
+      shouldRewrite: true,
+      code: script
+    }
+  }
+
+  // .js
+  if (filename.endsWith('.js') && shouldTransform(code)) {
+    const { code: script } = doTransform(code, { filename })
+    return {
+      shouldRewrite: true,
+      code: script
+    }
+  }
+
+  // .vue
+  return transformSFC(filename, code, injectImport)
+}
+
+function transformSFC(filename: string, code: string, injectImport: boolean) {
   const descriptor = compileFile(filename, code)
   const { script, scriptSetup } = descriptor
   const s = new MagicString(code)

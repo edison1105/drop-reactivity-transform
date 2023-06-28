@@ -4,12 +4,18 @@ import { drop } from '../drop'
 import path from 'path'
 import c from 'kleur'
 
-runCli(async args => {
+runCli(args => {
   const folder = args[0]
   const nonInjectImport = !args.includes('--nonInjectImport')
 
   const source = folder ? path.resolve(process.cwd(), folder) : process.cwd()
-  const files = fg.sync(`${source}/**/*.vue`)
+  const files = fg.sync([
+    `${source}/**/*.vue`,
+    `${source}/**/*.ts`,
+    `${source}/**/*.js`
+  ], {
+    ignore: ['**/node_modules/**']
+  })
 
   console.log(
     c.yellow(
@@ -17,12 +23,6 @@ runCli(async args => {
     )
   )
   for (const file of files) {
-    console.log(
-      c.green(
-        `[processing] ${file}]`
-      )
-    )
-    
     drop(path.resolve(process.cwd(), file), nonInjectImport)
 
     console.log(
