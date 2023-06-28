@@ -3,6 +3,7 @@ import { parse, SFCDescriptor } from 'vue/compiler-sfc'
 import MagicString from 'magic-string'
 import { RefTransformOptions, RefTransformResults, shouldTransform, transform } from './transform'
 import fs from 'fs'
+import c from 'kleur'
 
 export function drop(filename: string, injectImport = true) {
   try {
@@ -10,7 +11,19 @@ export function drop(filename: string, injectImport = true) {
     const { shouldRewrite, code } = transformScript(filename, content, injectImport)
     if (shouldRewrite) {
       fs.writeFileSync(filename, code, 'utf-8')
+      console.log(
+        c.green(
+          `[done] ${filename}`
+        )
+      )
+    } else {
+      console.log(
+        c.grey(
+          `[skip] ${filename}`
+        )
+      )
     }
+    
   } catch (error) {
     console.log(error)
   }

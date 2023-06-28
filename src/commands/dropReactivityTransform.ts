@@ -24,12 +24,6 @@ runCli(args => {
   )
   for (const file of files) {
     drop(path.resolve(process.cwd(), file), injectImport)
-
-    console.log(
-      c.green(
-        `[done] ${file}`
-      )
-    )
   }
 
   console.log(
