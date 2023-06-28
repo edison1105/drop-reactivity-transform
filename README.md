@@ -25,7 +25,8 @@ dropReactivityTransform src --nonInjectImport
 ```
 
 # Why use this tool?
-Reactivity Transform was an experimental feature and has now been deprecated. It will be removed from Vue core in version 3.4. If you don't want to use it anymore, this tool will help you convert your code and remove it.
+Reactivity Transform was an experimental feature and has now been deprecated. It will be removed from Vue core in version 3.4. see [[⚠️ Dropped] Reactivity Transform
+](https://github.com/vuejs/rfcs/discussions/369). If you don't want to use it anymore, this tool will help you convert your code and remove it.
 
 
 # How it works?
