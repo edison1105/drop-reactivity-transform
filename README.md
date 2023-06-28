@@ -1,6 +1,6 @@
 # drop-reactivity-transform 
 
-`drop-reactivity-transform` is a tool that helps you remove reactivity transform from your code base in seconds. It finds all the `.vue` files in the target folder and converts the code inside the `<script></script>` tag in the file. **Then it overwrites the original file**.
+`drop-reactivity-transform` is a tool that helps you remove reactivity transform from your code base in seconds. It finds all the `.vue`, `.ts`, `.js` files in the target folder and converts the code. **Then it overwrites the original file**.
 
 ## Installation
 ```bash
@@ -23,6 +23,7 @@ If you use [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import)
 ```bash
 dropReactivityTransform src --nonInjectImport
 ```
+> **NOTE: `--nonInjectImport` on work for `.vue` files. For `.ts` and `.js` files will always inject import**
 
 # Why use this tool?
 Reactivity Transform was an experimental feature and has now been deprecated. It will be removed from Vue core in version 3.4. see [[⚠️ Dropped] Reactivity Transform
@@ -76,3 +77,14 @@ Here's an example of using the `--nonInjectImport` flag:
 </script>
 ```
 
+Object destructure
+### Before
+```ts
+const { client } = $(useMasto())
+```
+### After
+```ts
+const __$temp_1 = (useMasto()),
+  client = toRef(__$temp_1, 'client');
+```
+> **You should format the code and modify the variable name**
