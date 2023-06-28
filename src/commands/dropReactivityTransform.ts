@@ -27,7 +27,7 @@ runCli(args => {
 
     console.log(
       c.green(
-        `[done] ${file}]`
+        `[done] ${file}`
       )
     )
   }
