@@ -6,7 +6,7 @@ import c from 'kleur'
 
 runCli(args => {
   const folder = args[0]
-  const nonInjectImport = !args.includes('--nonInjectImport')
+  const injectImport = !args.includes('--nonInjectImport')
 
   const source = folder ? path.resolve(process.cwd(), folder) : process.cwd()
   const files = fg.sync([
@@ -23,7 +23,7 @@ runCli(args => {
     )
   )
   for (const file of files) {
-    drop(path.resolve(process.cwd(), file), nonInjectImport)
+    drop(path.resolve(process.cwd(), file), injectImport)
 
     console.log(
       c.green(
