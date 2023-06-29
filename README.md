@@ -1,6 +1,6 @@
 # drop-reactivity-transform 
 
-`drop-reactivity-transform` is a tool that helps you remove reactivity transform from your code base in seconds. It finds all the `.vue`, `.ts`, `.js` files in the target folder and converts the code. **Then it overwrites the original code if necessary**.
+`drop-reactivity-transform` is a powerful tool that enables you to quickly remove reactivity transform from your code base. It automatically scans all the `.vue`, `.ts`, and `.js` files in your target folder, transforms the code, and replaces the original code as needed - all in a matter of seconds.
 
 ![screenshot](screenshot.png)
 
