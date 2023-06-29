@@ -1,6 +1,6 @@
 # drop-reactivity-transform 
 
-`drop-reactivity-transform` is a tool that helps you remove reactivity transform from your code base in seconds. It finds all the `.vue`, `.ts`, `.js` files in the target folder and converts the code. **Then it overwrites the original file**.
+`drop-reactivity-transform` is a tool that helps you remove reactivity transform from your code base in seconds. It finds all the `.vue`, `.ts`, `.js` files in the target folder and converts the code. **Then it overwrites the original code if necessary**.
 
 ![screenshot](screenshot.png)
 
@@ -89,4 +89,4 @@ const { client } = $(useMasto())
 const __$temp_1 = (useMasto()),
   client = toRef(__$temp_1, 'client');
 ```
-> **You should format the code and modify the variable name**
+> **NOTE: For this usage scenario, you should format the code and modify the variable name `_$temp_` by yourself**
