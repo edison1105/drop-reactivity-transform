@@ -10,7 +10,7 @@ npm i -g drop-reactivity-transform
 ```
 ## Usage
 
-To use drop-reactivity-transform, provide the target directory name as the first parameter. If no directory name is provided, the tool will use the current working directory by default. Here's an example:
+To utilize drop-reactivity-transform, simply specify the target directory name as the first parameter. If no directory name is provided, the tool will default to using the current working directory. Here is an example:
 ```bash
 dropReactivityTransform [target directory name]
 
@@ -25,7 +25,7 @@ If you use [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import)
 ```bash
 dropReactivityTransform src --nonInjectImport
 ```
-> **NOTE: `--nonInjectImport` on work for `.vue` files. For `.ts` and `.js` files will always inject import**
+> Please note that the `--nonInjectImport` option only works for `.vue` files. For both `.ts` and `.js` files, the tool will always inject the import regardless of whether this option is specified or not.
 
 # Why use this tool?
 Reactivity Transform was an experimental feature and has now been deprecated. It will be removed from Vue core in version 3.4. see [[⚠️ Dropped] Reactivity Transform
@@ -33,15 +33,14 @@ Reactivity Transform was an experimental feature and has now been deprecated. It
 
 
 # How it works?
-The `drop-reactivity-transform` tool converts the following ReactivityTransform APIs to reactivity APIs:
+The `drop-reactivity-transform` tool converts the following reactivity transform APIs to reactivity APIs:
 - `$ref` -> `ref`
 - `$computed` -> `computed`
 - `$shallowRef` -> `shallowRef`
 - `$customRef` -> `customRef`
 - `$toRef` -> `toRef`
 
-The [reactivity-transform](https://github.com/vuejs/core/tree/main/packages/reactivity-transform ) module has actually done the code to convert the above apis to the reactivity API internally. This tool takes that code and modifies it. 
-
+The [reactivity-transform](https://github.com/vuejs/core/tree/main/packages/reactivity-transform) module has already implemented the code to internally convert the above APIs to the reactivity API. This tool leverages that code and makes necessary modifications to it.
 
 # Examples of transformation
 Here's some examples of the transformation:
@@ -89,4 +88,4 @@ const { client } = $(useMasto())
 const __$temp_1 = (useMasto()),
   client = toRef(__$temp_1, 'client');
 ```
-> **NOTE: For this usage scenario, you should format the code and modify the variable name `_$temp_` by yourself**
+> Please note that for this usage scenario, you will need to format the code and manually modify the variable name `_$temp_` yourself
