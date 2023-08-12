@@ -132,11 +132,11 @@ function updateImports(content: string, imports: string[]) {
   const s = new MagicString(content)
   const vueImport = content.match(/import\s+{([^}]+)}\s+from\s+['"]vue['"]/)
   if (vueImport) {
-    const vueImportVars = vueImport[1].split(',').map(v => v.trim())
+    const vueImportVars = vueImport[1].split(',').map(v => v.trim()).filter(v => v)
     const newVars = imports.filter(v => !vueImportVars.includes(v))
     if (newVars.length) {
       const newImport = `import { ${[...vueImportVars, ...newVars].join(', ')} } from 'vue'`
-      const startIndex = vueImport.index! 
+      const startIndex = vueImport.index!
       s.overwrite(startIndex, startIndex + vueImport[0].length, newImport)
     }
   } else {
