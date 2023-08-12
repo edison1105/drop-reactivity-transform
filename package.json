@@ -1,6 +1,6 @@
 {
   "name": "drop-reactivity-transform",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "packageManager": "pnpm@7.4.0",
   "description": "a tool that helps you drop reactivity transform in seconds.",
   "author": "Edison1105 <daiwei521@126.com>",
