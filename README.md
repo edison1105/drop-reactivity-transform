@@ -89,3 +89,7 @@ const __$temp_1 = (useMasto()),
   client = toRef(__$temp_1, 'client');
 ```
 > Please note that for this usage scenario, you will need to format the code and manually modify the variable name `_$temp_` yourself
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=edison1105/drop-reactivity-transform&type=Date)](https://star-history.com/#edison1105/drop-reactivity-transform&Date)
