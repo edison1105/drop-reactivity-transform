@@ -9,13 +9,10 @@ runCli(args => {
   const injectImport = !args.includes('--nonInjectImport')
 
   const source = folder ? path.resolve(process.cwd(), folder) : process.cwd()
-  const files = fg.sync([
-    `${source}/**/*.vue`,
-    `${source}/**/*.ts`,
-    `${source}/**/*.js`
-  ], {
-    ignore: ['**/node_modules/**']
-  })
+  const files = fg.sync(
+    [fg.convertPathToPattern(source) + '/**/*.{vue,ts,js}'], 
+    {ignore: ['**/node_modules/**']}
+  )
 
   console.log(
     c.yellow(
